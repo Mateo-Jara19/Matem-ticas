@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Graficar Desigualdades</title>
+  <script src="https://www.desmos.com/api/v1.6/calculator.js?apiKey=YOUR_API_KEY"></script>
+  <style>
+    #calculator {
+      width: 100%;
+      height: 500px;
+    }
+    #input-area {
+      margin: 15px 0;
+    }
+  </style>
+</head>
+<body>
+  <h2>Graficador de Desigualdades</h2>
+
+  <div id="input-area">
+    <label for="inequality">Escribe una desigualdad (usa x e y):</label><br>
+    <input type="text" id="inequality" value="y < 2x + 3" size="30">
+    <button onclick="graficar()">Graficar</button>
+  </div>
+
+  <div id="calculator"></div>
+
+  <script>
+    const calculator = Desmos.GraphingCalculator(document.getElementById('calculator'), {
+      expressions: true,
+      settingsMenu: false
+    });
+
+    function graficar() {
+      const input = document.getElementById("inequality").value;
+      calculator.setExpressions([]);
+      calculator.setExpression({ id: '1', latex: input });
+    }
+  </script>
+</body>
+</html>
