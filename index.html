@@ -107,4 +107,20 @@
                 title: "Región de Solución de la Desigualdad",
                 showlegend: false
             };
-            Plotly.newPlot('plot', [traceRegion, traceLine], layout);…
+            Plotly.newPlot('plot', [traceRegion, traceLine], layout);
+        }
+
+        document.getElementById("form").onsubmit = function(e) {
+            e.preventDefault();
+            let A = parseFloat(document.getElementById("A").value);
+            let B = parseFloat(document.getElementById("B").value);
+            let C = parseFloat(document.getElementById("C").value);
+            let inequality = document.getElementById("inequality").value;
+            graficar(A, B, C, inequality);
+        };
+
+        // Ejemplo inicial por defecto
+        graficar(2, 3, 6, "leq");
+    </script>
+</body>
+</html>
