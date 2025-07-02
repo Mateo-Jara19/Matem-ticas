@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Optimización Lineal - MAX Z</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/javascript-lp-solver/0.4.24/solver.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f7f7f7;
+      padding: 20px;
+    }
+    h2 {
+      color: #d62828;
+    }
+    .resultado {
+      background-color: #ffe8cc;
+      padding: 10px;
+      border: 1px solid #f77f00;
+      border-radius: 5px;
+      width: fit-content;
+    }
+    button {
+      padding: 10px;
+      margin-top: 10px;
+      background-color: #003049;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #005f73;
+    }
+  </style>
+</head>
+<body>
+  <h2>Resolución de Programación Lineal</h2>
+
+  <p>Función objetivo: <strong>Max Z = 60X + 80Y</strong></p>
+  <p>Sujeto a:</p>
+  <ul>
+    <li>4X + 2Y ≤ 100</li>
+    <li>2X + 3Y ≤ 90</li>
+    <li>X ≥ 0</li>
+    <li>Y ≥ 0</li>
+  </ul>
+
+  <button onclick="resolver()">Resolver</button>
+
+  <div class="resultado" id="resultado"></div>
+
+  <script>
+    function resolver() {
+      // Definir el modelo
+      const model = {
+        optimize: "z",
+        opType: "max",
+        constraints: {
+          ec1: { max: 100 },
+          ec2: { max: 90 }
+        },
+        variables: {
+          x: {
+            ec1: 4,
+            ec2: 2,
+            z: 60
+          },
+          y: {
+            ec1: 2,
+            ec2: 3,
+            z: 80
+          }
+        },
+        ints: {}
+      };
+
+      const results = solver.Solve(model);
+
+      // Mostrar resultado
+      document.getElementById("resultado").innerHTML = `
+        <strong>Resultado Óptimo:</strong><br>
+        Z = ${results.result}<br>
+        X = ${results.x}<br>
+        Y = ${results.y}
+      `;
+    }
+  </script>
+</body>
+</html>
